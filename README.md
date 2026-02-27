@@ -87,5 +87,5 @@ MindMates aims to:
 https://drive.google.com/file/d/1fQA52ExWAYQxERFRwg6NYlKCembKPExI/view?usp=drivesdk
 
 
-#Webiste demo video link
+# Webiste demo video link
 https://drive.google.com/file/d/1i_N0eivqWQHnwK3lQ6NGGVJj5FoVfR4K/view?usp=sharing
