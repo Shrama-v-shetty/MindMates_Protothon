@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindMates – Emergency Response</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --brand-dark: #06402B;
+    --brand-primary: #059669;
+    --brand-hover: #047857;
+    --white: #ffffff;
+    --text-body: #374151;
+
+    --shadow-soft: 0 25px 50px rgba(0, 0, 0, 0.25);
+    --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    --bg-start: #06402B;
+    --bg-end: #4d8f73;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    color: var(--text-body);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 4rem;
+    backdrop-filter: blur(5px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: white;
+}
+
+/* LOGO IMAGE SIZING */
+.logo-img {
+    height: 100px;
+    width: auto;
+}
+
+.hero-logo {
+    height: 100px;
+    width: auto;
+}
+
+/* Buttons */
+.btn-outline {
+    padding: 0.6rem 1.7rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 50px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: var(--brand-dark);
+}
+
+/* ================= HERO ================= */
+.hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-scene {
+    width: 900px;
+    max-width: 95%;
+    height: 520px;
+    perspective: 2000px;
+}
+
+.hero-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
+
+.hero-scene.flip .hero-card {
+    transform: rotateY(180deg);
+}
+
+.hero-face {
+    position: absolute;
+    inset: 0;
+    padding: 3rem;
+    border-radius: 1.5rem;
+    background: white;
+    box-shadow: var(--shadow-soft);
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-front {
+    text-align: center;
+}
+
+.hero-front h1 {
+    font-size: 3rem;
+    color: var(--brand-dark);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+}
+
+.btn-primary {
+    background: var(--brand-primary);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1.1rem 3rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--brand-hover);
+}
+
+/* BACK */
+.hero-back {
+    transform: rotateY(180deg);
+    background: #f0fdf4;
+}
+
+.about-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: var(--brand-dark);
+}
+
+.about-boxes {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.about-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-card);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="MindMates Logo" class="logo-img">
+        <span>MindMates</span>
+    </div>
+    <button class="btn-outline" onclick="flipHero()">About Us</button>
+</nav>
+
+<section class="hero">
+    <div class="hero-scene" id="heroScene">
+        <div class="hero-card">
+
+            <!-- FRONT -->
+            <div class="hero-face hero-front">
+                <div class="logo" style="margin-bottom: 20px;">
+                    <img src="logo.png" alt="MindMates Logo" class="hero-logo">
+                </div>
+
+                <h1>Thinking Faster When Seconds Matter</h1>
+                <p class="subtitle">
+                    Connect emergency responders, hospitals, and citizens in real-time
+                    for faster coordinated medical response.
+                </p>
+                <button class="btn-primary" onclick="reportEmergency()">Report Emergency</button>
+            </div>
+
+            <!-- BACK -->
+            <div class="hero-face hero-back">
+                <h2 class="about-title">About Us</h2>
+                <div class="about-boxes">
+                    <div class="about-card">
+                        <h3>🎯 Our Mission</h3>
+                        <p>Enable faster emergency medical response using smart coordination.</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>⚡ What We Do</h3>
+                        <p>Instant reporting, ambulance tracking, and hospital alerts.</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>💚 Why MindMates</h3>
+                        <p>Because every second matters — technology saves lives.</p>
+                    </div>
+                </div>
+
+                <br>
+                <button class="btn-outline" onclick="flipHero()" style="color:#059669;border-color:#059669;">← Back</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer>
+© 2026 MindMates | Saving lives one second at a time
+</footer>
+
+<script>
+function flipHero() {
+    document.getElementById("heroScene").classList.toggle("flip");
+}
+
+function reportEmergency() {
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindMates | Extra Details</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ---------------- Reset & Variables ---------------- */
+    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+    
+    :root {
+      --brand-dark: #06402B;
+      --brand-primary: #059669;
+      --brand-hover: #047857;
+      --bg-start: #06402B;
+      --bg-end: #4d8f73;
+      --glass-white: rgba(255, 255, 255, 0.95);
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: var(--brand-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Navbar Overhaul */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .brand-icon {    width: 100px;
+    height: 100px; object-fit: contain; }
+    .brand-name { font-size: 24px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; }
+
+    /* Glassmorphism Card */
+    .card {
+      background: var(--glass-white);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 30px;
+      margin: 20px auto;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      width: 90%;
+      max-width: 400px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card h3 { 
+      margin-bottom: 25px; 
+      color: var(--brand-dark); 
+      text-align: center; 
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    /* Form Elements Styling */
+    .input-group { margin-bottom: 18px; }
+    .input-group label { 
+      font-size: 13px; 
+      color: #64748b; 
+      display: block; 
+      margin-bottom: 6px; 
+      font-weight: 700;
+      margin-left: 4px;
+    }
+    
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1.5px solid #e2e8f0;
+      background: #f8fafc;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+    }
+
+    .input-group input:focus, .input-group select:focus {
+      border-color: var(--brand-primary);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+    }
+
+    #relationshipOther { display: none; margin-top: -5px; }
+
+    /* Button Styling */
+    .confirm-btn {
+      width: 100%;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 16px;
+      border: none;
+      background: var(--brand-primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .confirm-btn:disabled {
+      background: #cbd5e1;
+      color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .confirm-btn:hover:enabled { 
+      background: var(--brand-hover);
+      transform: translateY(-2px); 
+      box-shadow: 0 12px 25px rgba(5, 150, 105, 0.4); 
+    }
+
+    /* Consent Checkbox Styling */
+    .consent-inline { margin-top: 20px; }
+    .consent-inline label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--brand-dark);
+      font-weight: 600;
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .consent-inline label:hover {
+      background: #ecfdf5;
+    }
+
+    .consent-inline input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--brand-primary);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="logo">
+    <img src="logo.png" class="brand-icon">
+    <span class="brand-name">MindMates</span>
+  </div>
+</header>
+
+<!-- Extra Details Card -->
+<section class="card">
+  <h3>📝 Emergency Contact Details</h3>
+
+  <!-- Relationship -->
+  <div class="input-group">
+    <label>Relationship</label>
+    <select id="relationship">
+      <option value="">Select</option>
+      <option>Parent</option>
+      <option>Sibling</option>
+      <option>Friend</option>
+      <option>Other</option>
+    </select>
+    <input type="text" id="relationshipOther" placeholder="If Other, specify">
+  </div>
+
+  <!-- Phone Numbers -->
+  <div class="input-group">
+    <label>Phone Number</label>
+    <input type="tel" id="phone1" placeholder="Primary Number">
+    <input type="tel" id="phone2" placeholder="Alternate Number (Optional)">
+  </div>
+
+  <!-- Blood Group -->
+  <div class="input-group">
+    <label>Blood Group</label>
+    <select id="bloodGroup">
+      <option value="">Select</option>
+      <option>A+</option>
+      <option>A-</option>
+      <option>B+</option>
+      <option>B-</option>
+      <option>O+</option>
+      <option>O-</option>
+      <option>AB+</option>
+      <option>AB-</option>
+    </select>
+  </div>
+
+  <!-- Consent Checkbox Inline -->
+  <div class="input-group consent-inline">
+    <label for="consent">
+      <input type="checkbox" id="consent">
+      I have my consent
+    </label>
+  </div>
+
+  <!-- Done Button -->
+  <button id="doneBtn" class="confirm-btn" disabled>Done</button>
+</section>
+
+<script>
+  // Get all DOM elements
+  const relationship = document.getElementById("relationship");
+  const relationshipOther = document.getElementById("relationshipOther");
+  const consentCheckbox = document.getElementById("consent");
+  const doneBtn = document.getElementById("doneBtn");
+  const phone1 = document.getElementById("phone1");
+  const phone2 = document.getElementById("phone2");
+  const bloodGroup = document.getElementById("bloodGroup");
+
+  // Function to show/hide 'Other' input
+  const toggleOtherRelationship = () => {
+    relationshipOther.style.display = relationship.value === "Other" ? "block" : "none";
+  };
+
+  relationship.addEventListener("change", toggleOtherRelationship);
+  toggleOtherRelationship(); // run on page load in case 'Other' is pre-selected
+
+  // Function to enable/disable Done button based on checkbox
+  const updateButtonState = () => {
+    if (consentCheckbox.checked) {
+      doneBtn.disabled = false;
+      doneBtn.style.backgroundColor = "#28a745"; // green
+      doneBtn.style.cursor = "pointer";
+    } else {
+      doneBtn.disabled = true;
+      doneBtn.style.backgroundColor = "#888"; // gray
+      doneBtn.style.cursor = "not-allowed";
+    }
+  };
+
+  consentCheckbox.addEventListener("change", updateButtonState);
+  updateButtonState(); // run on page load
+
+  // Handle Done button click
+ doneBtn.addEventListener("click", async (e) => {
+  e.preventDefault(); // Prevent default form submission
+
+  if (!consentCheckbox.checked) return alert("⚠️ You must give consent to proceed!");
+
+  const userId = localStorage.getItem("userId");
+  if (!userId) return alert("❌ User not logged in");
+
+  const relationshipValue = relationship.value === "Other" ? relationshipOther.value : relationship.value;
+
+  // Validate required fields
+  if (!phone1.value || !bloodGroup.value) return alert("⚠️ Please fill all required fields.");
+
+  try {
+    const res = await fetch("http://localhost:5000/api/extra/save-extra", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId,
+        relationship: relationshipValue,
+        phone1: phone1.value,
+        phone2: phone2.value,
+        bloodGroup: bloodGroup.value
+      })
+    });
+
+    if (!res.ok) {
+      const text = await res.text(); // If server error returns HTML
+      console.error("Server error:", text);
+      return alert("❌ Failed to save details. Server error.");
+    }
+
+    const data = await res.json();
+
+    if (data.user) {
+      alert("✅ Extra details saved successfully!");
+      relationship.value = "";
+      relationshipOther.value = "";
+      relationshipOther.style.display = "none";
+      phone1.value = "";
+      phone2.value = "";
+      bloodGroup.value = "";
+      consentCheckbox.checked = false;
+      updateButtonState();
+    } else {
+      alert("❌ Failed to save details. Try again!");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("❌ Error connecting to server.");
+  }
+});
+
+</script>
+</body>
+</html>

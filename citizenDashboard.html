@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindMates | Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================= RESET & VARIABLES ================= */
+    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+
+    :root {
+      --brand-dark: #06402B;
+      --brand-primary: #059669;
+      --brand-hover: #047857;
+      --bg-start: #06402B;
+      --bg-end: #4d8f73;
+      --error-red: #ef4444;
+      --glass-white: rgba(255, 255, 255, 0.95);
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: var(--brand-dark);
+      min-height: 100vh;
+      padding-bottom: 40px;
+      overflow-x: hidden; 
+    }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      position: relative; 
+      background: rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      width: 100%;
+    }
+
+    .logo { display: flex; align-items: center; gap: 5px; }
+    .brand-icon { width: 80px; height: 80px; object-fit: contain; }
+    .brand-name { font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; }
+
+    /* ================= WELCOME ================= */
+    .welcome { text-align: center; padding: 30px 20px 10px; color: white; }
+    .welcome h2 { font-size: 26px; font-weight: 700; }
+    .welcome p { font-size: 14px; opacity: 0.85; margin-top: 4px; }
+
+    /* ================= QUICK ACTIONS ================= */
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .action-card {
+      background: var(--glass-white);
+      border-radius: 24px;
+      padding: 25px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .action-card:hover { transform: translateY(-5px); background: #ffffff; }
+    .action-card .icon-box { font-size: 34px; margin-bottom: 10px; }
+    .action-card h4 { font-size: 15px; font-weight: 800; color: var(--brand-dark); }
+    .action-card p { font-size: 11px; color: #64748b; font-weight: 500; }
+
+    /* Identification Accents */
+    .emergency-btn { border-bottom: 5px solid var(--error-red); }
+    .guidance-btn { border-bottom: 5px solid #10b981; }
+    .details-btn { border-bottom: 5px solid #3b82f6; }
+    .ai-btn { border-bottom: 5px solid #8b5cf6; }
+
+    /* ================= ACTIVE RESPONSE CARD ================= */
+    .info-section { max-width: 500px; margin: 0 auto; padding: 0 20px; }
+
+    .status-card {
+      background: var(--glass-white);
+      border-radius: 24px;
+      padding: 24px;
+      margin-top: 10px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .status-card h3 { 
+      margin-bottom: 18px; 
+      color: var(--brand-dark); 
+      font-size: 18px; 
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pulse { display: inline-block; animation: pulse-red 2s infinite; }
+    @keyframes pulse-red {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .status-list { display: flex; flex-direction: column; gap: 12px; }
+    .status-item {
+      background: #f8fafc;
+      padding: 14px 18px;
+      border-radius: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #e2e8f0;
+    }
+    .status-label { font-size: 13px; color: #64748b; font-weight: 600; }
+    .status-value { font-size: 14px; color: var(--brand-dark); font-weight: 700; }
+    .status-value.eta { color: var(--brand-primary); }
+
+    /* ================= EMERGENCY FOOTER ================= */
+    .emergency-panel {
+      margin-top: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    .emergency-panel p { font-size: 13px; font-weight: 400; margin-bottom: 10px; }
+    .call-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--error-red);
+      color: white;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 8px 15px rgba(239, 68, 68, 0.3);
+      transition: 0.3s;
+    }
+    .call-btn:hover { transform: scale(1.05); background: #dc2626; }
+
+    /* ================= MODAL STYLES ================= */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 420px;
+      margin: 15% auto;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { font-weight: 800; }
+    .close { cursor: pointer; font-size: 22px; font-weight: 700; }
+    .modal-body label { font-size: 13px; font-weight: 600; display: block; margin-top: 12px; }
+    .modal-body input, .modal-body select {
+      width: 100%; padding: 10px; border-radius: 12px; border: 1px solid #cbd5f5; margin-top: 5px;
+    }
+    .session-type { display: flex; gap: 10px; margin-top: 10px; }
+    .session { flex: 1; padding: 8px; border-radius: 20px; border: 1px solid #cbd5f5; background: #f1f5f9; cursor: pointer; }
+    .session.active { background: var(--brand-primary); color: white; border-color: var(--brand-primary); }
+    .confirm-btn { width: 100%; margin-top: 15px; padding: 12px; border-radius: 30px; border: none; background: var(--brand-primary); color: white; font-weight: 800; cursor: pointer; }
+    .confirm-btn:hover { background: var(--brand-hover); }
+     /* Floating Button */
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; 
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="logo.png" class="brand-icon" alt="MindMates Logo">
+      <span class="brand-name">MindMates</span>
+    </div>
+  </header>
+
+  <!-- WELCOME -->
+  <section class="welcome">
+    <h2>Welcome back!</h2>
+    <p>How can we support you today?</p>
+  </section>
+
+  <!-- QUICK ACTIONS -->
+  <section class="actions">
+    <div class="action-card emergency-btn" onclick="openEmergency()">
+      <div class="icon-box">🚨</div>
+      <h4>Emergency Reporting</h4>
+      <p>Quick help</p>
+    </div>
+    <div class="action-card guidance-btn" onclick="openGuidance()">
+      <div class="icon-box">💬</div>
+      <h4>Guidance Section</h4>
+      <p>First aid tips</p>
+    </div>
+    <div class="action-card details-btn" onclick="openExtra()">
+      <div class="icon-box">📋</div>
+      <h4>Extra Details</h4>
+      <p></p>
+    </div>
+    <div class="action-card ai-btn" onclick="openChatbot()">
+      <div class="icon-box">🧠</div>
+      <h4>AI Assistant</h4>
+      <p>24/7 AI assistance</p>
+    </div>
+  </section>
+  <!-- Floating Button -->
+<button id="viewUsersBtn" class="floating-btn">👥 View Registered Users</button>
+
+<!-- Modal to show users -->
+<div id="usersModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Registered Users</h2>
+    <div id="usersList"></div>
+  </div>
+</div>
+
+
+  <!-- ACTIVE RESPONSE -->
+  <div class="info-section">
+    <section class="status-card">
+      <h3><span class="pulse">🚑</span> Active Response</h3>
+      <div class="status-list">
+        <div class="status-item">
+          <span class="status-label">Current Status</span>
+          <span class="status-value">Ambulance Assigned</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Estimated Arrival</span>
+          <span class="status-value eta">12 Minutes</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Destination</span>
+          <span class="status-value">General Hospital</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="emergency-panel">
+      <p>Need immediate medical assistance?</p>
+      <a href="tel:108" class="call-btn"><span>📞</span> Call 108</a>
+    </section>
+  </div>
+
+  <!-- MODAL -->
+  <div id="appointmentModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Book Appointment</h3>
+        <span class="close" onclick="closeModal()">×</span>
+      </div>
+      <div class="modal-body">
+        <label>Select Date</label>
+        <input type="date" id="apptDate">
+        <label>Select Time</label>
+        <select id="apptTime">
+          <option value="">Select Time</option>
+          <option>9:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+        </select>
+        <label>Session Type</label>
+        <div class="session-type">
+          <button class="session active">Video Call</button>
+          <button class="session">Chat</button>
+        </div>
+        <button class="confirm-btn" onclick="alert('Appointment Confirmed!')">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openEmergency() { window.location.href="emergencyReporting.html"; }
+    function openGuidance() { window.location.href="guidance.html"; }
+    function openExtra() { window.location.href="Extradetails.html"; }
+    function openChatbot() { window.location.href="chatbot.html"; }
+    function closeModal() { document.getElementById("appointmentModal").style.display = "none"; }
+
+    document.addEventListener("click", e => {
+      if(e.target.classList.contains("session")){
+        document.querySelectorAll(".session").forEach(b => b.classList.remove("active"));
+        e.target.classList.add("active");
+      }
+    });
+    // Get modal elements
+const usersModal = document.getElementById("usersModal");
+const viewUsersBtn = document.getElementById("viewUsersBtn");
+const closeModalBtn = usersModal.querySelector(".close");
+const usersList = document.getElementById("usersList");
+
+// Open modal on floating button click
+viewUsersBtn.onclick = async () => {
+  usersModal.style.display = "block";
+
+  // Fetch all registered users from backend
+  try {
+    const response = await fetch('http://localhost:5000/api/extra/all-users');
+// Backend endpoint
+    const users = await response.json();
+
+    usersList.innerHTML = ''; // Clear previous list
+
+    users.forEach(user => {
+      const div = document.createElement('div');
+      div.style.marginBottom = "12px";
+      div.style.padding = "10px";
+      div.style.borderBottom = "1px solid #ccc";
+
+      div.innerHTML = `
+        <strong>${user.name}</strong><br>
+        Relationship: ${user.extraDetails?.relationship || '-'}<br>
+        Phone 1: ${user.extraDetails?.phone1 || '-'}<br>
+        Phone 2: ${user.extraDetails?.phone2 || '-'}<br>
+        Blood Group: ${user.extraDetails?.bloodGroup || '-'}
+      `;
+
+      usersList.appendChild(div);
+    });
+  } catch (err) {
+    usersList.innerHTML = '<p style="color:red;">Failed to load users.</p>';
+    console.error(err);
+  }
+};
+
+// Close modal on X click
+closeModalBtn.onclick = () => {
+  usersModal.style.display = "none";
+};
+
+// Close modal if clicked outside modal content
+window.onclick = (event) => {
+  if(event.target == usersModal){
+    usersModal.style.display = "none";
+  }
+};
+doneBtn.addEventListener("click", async () => {
+  if (!consentCheckbox.checked) {
+    alert("⚠️ Your consent is required!");
+    return;
+  }
+
+  const userId = localStorage.getItem("userId"); // Save userId on login
+  const relationshipValue = relationship.value === "Other" ? relationshipOther.value : relationship.value;
+
+  try {
+   const res = await fetch("http://localhost:5000/api/extra/save-extra", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    userId,
+    relationship: relationshipValue,
+    phone1: document.getElementById("phone1").value,
+    phone2: document.getElementById("phone2").value,
+    bloodGroup: document.getElementById("bloodGroup").value
+  })
+});
+
+
+    const data = await res.json();
+    if (data.user) alert("✅ Your extra details are saved!");
+
+  } catch (err) {
+    console.error(err);
+    alert("❌ Failed to save data.");
+  }
+});
+
+
+  </script>
+
+</body>
+</html>

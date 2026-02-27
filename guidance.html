@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Emergency Guidance</title>
+
+<style>
+/* ================= RESET & VARIABLES ================= */
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+
+:root {
+  --brand-dark: #06402B;
+  --brand-primary: #059669;
+  --bg-start: #06402B;
+  --bg-end: #4d8f73;
+  --error-red: #ef4444;
+  --glass-white: rgba(255, 255, 255, 0.95);
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--brand-dark);
+  min-height: 100vh;
+  padding: 30px 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* ================= TYPOGRAPHY ================= */
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 40px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* ================= CARD STYLING ================= */
+.card {
+  background: var(--glass-white);
+  padding: 25px;
+  margin-bottom: 20px;
+  border-left: 8px solid var(--brand-primary);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: var(--brand-dark);
+  font-size: 19px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.card ul {
+  padding-left: 5px;
+  list-style-type: none; /* Cleaner look */
+}
+
+.card li {
+  margin-bottom: 12px;
+  line-height: 1.5;
+  font-size: 14px;
+  color: #334155;
+  position: relative;
+  padding-left: 25px;
+}
+
+/* Custom checkmark/bullet */
+.card li::before {
+  content: "•";
+  color: var(--brand-primary);
+  font-weight: bold;
+  display: inline-block; 
+  width: 1em;
+  margin-left: -1em;
+  position: absolute;
+  left: 10px;
+  font-size: 20px;
+}
+
+/* ================= WARNING CARD ================= */
+.warning {
+  border-left-color: var(--error-red);
+  background: #fff; /* Solid white for emphasis */
+}
+
+.warning h2 {
+  color: var(--error-red);
+}
+
+.warning li::before {
+  content: "✕";
+  color: var(--error-red);
+  font-size: 14px;
+  top: 2px;
+}
+
+/* ================= FOOTER ================= */
+.footer-note {
+  text-align: center;
+  margin-top: 40px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-style: italic;
+  padding: 0 10px;
+}
+
+/* Back button feel (Optional visual logic) */
+.card strong {
+  color: var(--error-red);
+  font-weight: 700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🆘 Emergency Guidance</h1>
+  <p class="subtitle">What to do before the ambulance arrives</p>
+
+  <div class="card">
+    <h2>🚨 Stay Calm & Ensure Safety</h2>
+    <ul>
+      <li>Stay calm and take a deep breath.</li>
+      <li>Check for moving traffic, fire, or electrical hazards.</li>
+      <li>Move to a safe place without risking yourself.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🧍 Check the Person</h2>
+    <ul>
+      <li>Call out loudly: “Can you hear me?”</li>
+      <li>Gently tap the shoulder.</li>
+      <li>If responsive, keep them calm and still.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>😵 If the Person Is Unconscious</h2>
+    <ul>
+      <li>Check if the person is breathing.</li>
+      <li>If breathing, place them on their side.</li>
+      <li>If not breathing, call emergency services immediately.</li>
+      <li><strong>Do not give food or water.</strong></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🩸 If There Is Bleeding</h2>
+    <ul>
+      <li>Use a clean cloth or bandage.</li>
+      <li>Apply firm pressure to stop bleeding.</li>
+      <li>Do not remove cloth if soaked with blood.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🦴 Suspected Fracture or Spine Injury</h2>
+    <ul>
+      <li>Do not move the injured person.</li>
+      <li>Support the injured area if possible.</li>
+      <li>Keep the person warm and still.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🚗 Road Accident Tips</h2>
+    <ul>
+      <li>Turn off vehicle engines if safe.</li>
+      <li>Use hazard lights or warning triangles.</li>
+      <li>Do not remove helmets unless necessary.</li>
+    </ul>
+  </div>
+
+  <div class="card warning">
+    <h2>❌ What NOT to Do</h2>
+    <ul>
+      <li>Do not crowd around the injured person.</li>
+      <li>Do not give food, alcohol, or medicine.</li>
+      <li>Do not panic or shout.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📞 Stay Available</h2>
+    <ul>
+      <li>Keep your phone with you.</li>
+      <li>Emergency services may contact you.</li>
+      <li>Reassure the injured person that help is coming.</li>
+    </ul>
+  </div>
+
+  <!-- New CPR Section -->
+  <div class="card">
+    <h2>❤️ CPR (Cardiopulmonary Resuscitation) Steps</h2>
+    <ul>
+      <li>Ensure the scene is safe.</li>
+      <li>Check if the person is responsive and breathing.</li>
+      <li>If unresponsive and not breathing, call emergency services immediately.</li>
+      <li>Place the heel of one hand on the center of the chest, the other hand on top.</li>
+      <li>Keep arms straight and press hard and fast: 100–120 compressions per minute, depth ~5–6 cm (2–2.5 inches).</li>
+      <li>Allow the chest to fully recoil between compressions.</li>
+      <li>If trained and comfortable, provide rescue breaths: 2 breaths after every 30 compressions.</li>
+      <li>Continue CPR until professional help arrives or the person starts breathing.</li>
+      <li><strong>Do not stop unless help arrives or you are exhausted.</strong></li>
+    </ul>
+  </div>
+
+  <p class="footer-note">
+    This guidance is meant to assist citizens responsibly until professional help arrives.
+  </p>
+
+</div>
+
+</body>
+</html>
